@@ -32,7 +32,7 @@ if (type == 0)
             'PA_label20.mat';'PA_label21.mat';'PA_label24.mat';'PA_label25.mat';'PA_label26.mat';'PA_label27.mat'; ...
             'PA_label30.mat';'PA_label31.mat'];
     end
-    dir_name = ['/home/yongyi/data/eccv_data/'];
+    dir_name = '/home/yongyi/data/eccv_data/';
     person_hog_feature = [];
     person_hog_label = [];
     for i = 1:22

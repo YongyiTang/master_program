@@ -1,4 +1,14 @@
-function collect_ac_data(set)
+function collect_ac_data(set,test)
+if nargin <= 1
+    test = 0;
+end
+
+if test == 0
+    ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data';
+elseif test == 1
+    ac_data_dir = '/home/yongyi/master_program_data/improved_ac_data';
+end
+
 anno_name = ['anno01.mat';'anno02.mat';'anno03.mat';'anno04.mat';'anno05.mat';'anno06.mat';'anno07.mat';'anno08.mat';'anno09.mat'; ...
     'anno10.mat';'anno11.mat';'anno12.mat';'anno13.mat';'anno14.mat';'anno15.mat';'anno16.mat';'anno17.mat';'anno18.mat';'anno19.mat'; ...
     'anno20.mat';'anno21.mat';'anno22.mat';'anno23.mat';'anno24.mat';'anno25.mat';'anno26.mat';'anno27.mat';'anno28.mat';'anno29.mat'; ...
@@ -7,7 +17,10 @@ ac_name = ['ac01.mat';'ac02.mat';'ac03.mat';'ac04.mat';'ac05.mat';'ac06.mat';'ac
     'ac10.mat';'ac11.mat';'ac12.mat';'ac13.mat';'ac14.mat';'ac15.mat';'ac16.mat';'ac17.mat';'ac18.mat';'ac19.mat'; ...
     'ac20.mat';'ac21.mat';'ac22.mat';'ac23.mat';'ac24.mat';'ac25.mat';'ac26.mat';'ac27.mat';'ac28.mat';'ac29.mat'; ...
     'ac30.mat';'ac31.mat';'ac32.mat';'ac33.mat'];
-anno_dir = ['/home/yongyi/data/eccv_data/annotations/'];
+anno_dir = '/home/yongyi/data/eccv_data/annotations/';
+if (exist(ac_data_dir,'file')==0)
+     error('ac files do not exist!');
+end
 %% get the set
 if (set == 1)
     train_seq = [3,4,5,6,8,9,10,11,14,15,16,17,18,22,23,24,25,28,29,31,32];
@@ -26,7 +39,7 @@ train_label = [];
 for k = train_seq
     %% read the anno data
     this_anno_dir = [anno_dir,anno_name(k,:)];
-    this_ac_dir = ['data/',ac_name(k,:)];
+    this_ac_dir = [ac_data_dir,ac_name(k,:)];
     load(this_anno_dir);
     load(this_ac_dir);
     for i = 1:length(anno.people)                                            %length(anno.people)�õ�����
@@ -57,24 +70,24 @@ for k = train_seq
     end
 end
 if set ==1
-save('train_ac_feature_set1.mat','train_ac_feature');
-save('train_label_set1.mat','train_label');
+save([ac_data_dir,'train_ac_feature_set1.mat'],'train_ac_feature');
+save([ac_data_dir,'train_label_set1.mat'],'train_label');
 elseif set ==2
-    save('train_ac_feature_set2.mat','train_ac_feature');
-save('train_label_set2.mat','train_label');
+    save([ac_data_dir,'train_ac_feature_set2.mat'],'train_ac_feature');
+save([ac_data_dir,'train_label_set2.mat'],'train_label');
 elseif set ==3
-    save('train_ac_feature_set3.mat','train_ac_feature');
-save('train_label_set3.mat','train_label');
+    save([ac_data_dir,'train_ac_feature_set3.mat'],'train_ac_feature');
+save([ac_data_dir,'train_label_set3.mat'],'train_label');
 else
-    save('train_ac_feature.mat','train_ac_feature');
-save('train_label.mat','train_label');
+    save([ac_data_dir,'train_ac_feature.mat'],'train_ac_feature');
+save([ac_data_dir,'train_label.mat'],'train_label');
 end
 test_ac_feature = [];
 test_label = [];
 for k = test_seq
     %% read the anno data
     this_anno_dir = [anno_dir,anno_name(k,:)];
-    this_ac_dir = ['data/',ac_name(k,:)];
+    this_ac_dir = [ac_data_dir,ac_name(k,:)];
     load(this_anno_dir);
     load(this_ac_dir);
     for i = 1:length(anno.people)                                            %length(anno.people)�õ�����
@@ -106,17 +119,17 @@ for k = test_seq
     end
 end
 if set ==1
-save('test_ac_feature_set1.mat','test_ac_feature');
-save('test_label_set1.mat','test_label');
+save([ac_data_dir,'test_ac_feature_set1.mat'],'test_ac_feature');
+save([ac_data_dir,'test_label_set1.mat'],'test_label');
 elseif set ==2
-    save('test_ac_feature_set2.mat','test_ac_feature');
-save('test_label_set2.mat','test_label');
+    save([ac_data_dir,'test_ac_feature_set2.mat'],'test_ac_feature');
+save([ac_data_dir,'test_label_set2.mat'],'test_label');
 elseif set == 3
-    save('test_ac_feature_set3.mat','test_ac_feature');
-save('test_label_set3.mat','test_label');
+    save([ac_data_dir,'test_ac_feature_set3.mat'],'test_ac_feature');
+save([ac_data_dir,'test_label_set3.mat'],'test_label');
 else
-    save('test_ac_feature.mat','test_ac_feature');
-save('test_label.mat','test_label');
+    save([ac_data_dir,'test_ac_feature.mat'],'test_ac_feature');
+save([ac_data_dir,'test_label.mat'],'test_label');
 end
 
 

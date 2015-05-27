@@ -1,8 +1,24 @@
-function acc = full_ac(num_c,set)%set3 num_c 20 acc 0.7177
+function acc = full_ac(set,test)
+if nargin <= 1
+    test = 0;
+end
 addpath('/home/yongyi/libsvm-3.20/matlab');
 addpath('/home/yongyi/data/eccv_data/version_0416/multilayer_supervised');
 addpath('/home/yongyi/data/eccv_data/version_0416/NN');
 run('/home/yongyi/vlfeat-0.9.20-bin/vlfeat-0.9.20/toolbox/vl_setup');
+% ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data';
+if test == 0
+    ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data';
+elseif test == 1
+    ac_data_dir = '/home/yongyi/master_program_data/improved_ac_data';
+end
+predict_data_dir = '/home/yongyi/master_program_data/predict_data';
+if (exist(predict_data_dir,'file')==0)
+    mkdir predict_data_dir
+end
+if (exist(ac_data_dir,'file')==0)
+    error('ac files do not exist!');
+end
 % addpath('E:\master program\UFLDL\stanford_dl_ex-master\multilayer_supervised_copy');
 % addpath('E:\master program\UFLDL\stanford_dl_ex-master\common\minFunc_2012');
 % load('new_prob_set3_pose.mat');
@@ -12,28 +28,28 @@ run('/home/yongyi/vlfeat-0.9.20-bin/vlfeat-0.9.20/toolbox/vl_setup');
 % load('person_hog_label_test_set3.mat');
 % collect_prob(prob_pose,prob_action,person_hog_label);
 % Copy_of_sixteen_dir_get_my_AC(set);
-%  collect_ac_data(set);
+%  collect_ac_data(set,test);
 if set == 1
-    load('train_label_set1.mat');
-    load('train_ac_feature_set1.mat');
-    load('test_label_set1.mat');
-    load('test_ac_feature_set1.mat');
+    load([ac_data_dir,'train_label_set1.mat']);
+    load([ac_data_dir,'train_ac_feature_set1.mat']);
+    load([ac_data_dir,'test_label_set1.mat']);
+    load([ac_data_dir,'test_ac_feature_set1.mat']);
     elseif set ==2
-        load('train_label_set2.mat');
-    load('train_ac_feature_set2.mat');
-    load('test_label_set2.mat');
-    load('test_ac_feature_set2.mat');
+        load([ac_data_dir,'train_label_set2.mat']);
+    load([ac_data_dir,'train_ac_feature_set2.mat']);
+    load([ac_data_dir,'test_label_set2.mat']);
+    load([ac_data_dir,'test_ac_feature_set2.mat']);
     elseif set == 3
-        load('train_label_set3.mat');
-    load('train_ac_feature_set3.mat');
-    load('test_label_set3.mat');
-    load('test_ac_feature_set3.mat');
+        load([ac_data_dir,'train_label_set3.mat']);
+    load([ac_data_dir,'train_ac_feature_set3.mat']);
+    load([ac_data_dir,'test_label_set3.mat']);
+    load([ac_data_dir,'test_ac_feature_set3.mat']);
     else
-        load('train_label.mat');
-    load('train_ac_feature.mat');
-    load('test_label.mat');
-    load('test_ac_feature.mat');
-    end
+        load([ac_data_dir,'train_label.mat']);
+    load([ac_data_dir,'train_ac_feature.mat']);
+    load([ac_data_dir,'test_label.mat']);
+    load([ac_data_dir,'test_ac_feature.mat']);
+end
 % [center,assignments] = vl_kmeans(train_ac_feature,num_c,'Initialization','plusplus');
 % train_kmeans_ac_feature = zeros(size(train_ac_feature));
 % test_kmeans_ac_feature = zeros(size(test_ac_feature));
@@ -90,11 +106,11 @@ train_data = (train_ac_feature-min_train_ac)./(max_train_ac-min_train_ac);
 [X,pre_label] = max(TY,[],1);
 acc = get_frame_acc(pre_label,test_label)
 % if set == 1
-%     save('pre_label_set1','pre_label');
+%     save([predict_data_dir,'pre_label_set1'],'pre_label');
 %     elseif set ==2
-%     save('pre_label_set2','pre_label');
+%     save([predict_data_dir,'pre_label_set2'],'pre_label');
 %     elseif set == 3
-%      save('pre_label_set3','pre_label');
+%      save([predict_data_dir,'pre_label_set3'],'pre_label');
 %     else
-%     save('pre_label','pre_label');
+%     save([predict_data_dir,'pre_label'],'pre_label');
 %     end

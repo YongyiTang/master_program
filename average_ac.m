@@ -1,5 +1,5 @@
 function average_ac(ac_label,ac_feature)
-
+data_dir = '/home/yongyi/master_program_data/max_ac_data';
 feature = [];
 label = [];
 for i = 1:33
@@ -23,5 +23,5 @@ average_feature = max(temp_feature,[],2);
         feature = [feature,average_feature];
     end
 end
-save('max_ac_feature','feature');
-save('max_ac_label','label');
+save([data_dir,'max_ac_feature'],'feature');
+save([data_dir,'max_ac_label'],'label');

@@ -28,7 +28,15 @@ ac_name = ['ac01.mat';'ac02.mat';'ac03.mat';'ac04.mat';'ac05.mat';'ac06.mat';'ac
     'ac10.mat';'ac11.mat';'ac12.mat';'ac13.mat';'ac14.mat';'ac15.mat';'ac16.mat';'ac17.mat';'ac18.mat';'ac19.mat'; ...
     'ac20.mat';'ac21.mat';'ac22.mat';'ac23.mat';'ac24.mat';'ac25.mat';'ac26.mat';'ac27.mat';'ac28.mat';'ac29.mat'; ...
     'ac30.mat';'ac31.mat';'ac32.mat';'ac33.mat'];
-anno_dir = ['/home/yongyi/data/eccv_data/annotations/'];
+anno_dir = '/home/yongyi/data/eccv_data/annotations/';
+hog_dir = '/home/yongyi/data/eccv_data/version_0416/data/';
+ac_data_dir = '/home/yongyi/master_program_data/improved_ac_data';
+if (exist(ac_data_dir ,'file')==0)
+     mkdir ac_data_dir 
+end
+if (exist(hog_dir,'file')==0)
+    error('hog files do not exist!');
+end
 B_LB_view = [0;3;4;5;6;7;8;1;2;9];
 L_LF_view = [0;5;6;7;8;1;2;3;4;9];
 F_FR_view = [0;7;8;1;2;3;4;5;6;9];
@@ -39,8 +47,8 @@ for k = 1:33
     %     load(hog_anno_pose_name(k,:));
     %     load(hog_anno_action_name(k,:));
     this_anno_dir = [anno_dir,anno_name(k,:)];
-    this_action_dir = ['data/',hog_anno_action_name(k,:)];
-    this_pose_dir = ['data/',hog_anno_pose_name(k,:)];
+    this_action_dir = [hog_dir,hog_anno_action_name(k,:)];
+    this_pose_dir = [hog_dir,hog_anno_pose_name(k,:)];
     load(this_anno_dir);
     load(this_pose_dir);
     load(this_action_dir);
@@ -359,7 +367,7 @@ for k = 1:33
             %                         ac_feature_cell{i,t} =  stl_total;
         end
     end
-    save(['data/',ac_name(k,:)],'ac_feature_cell');
+    save([ac_data_dir,ac_name(k,:)],'ac_feature_cell');
 end
 end
 

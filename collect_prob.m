@@ -12,7 +12,11 @@ anno_name = ['anno01.mat';'anno02.mat';'anno03.mat';'anno04.mat';'anno05.mat';'a
     'anno10.mat';'anno11.mat';'anno12.mat';'anno13.mat';'anno14.mat';'anno15.mat';'anno16.mat';'anno17.mat';'anno18.mat';'anno19.mat'; ...
     'anno20.mat';'anno21.mat';'anno22.mat';'anno23.mat';'anno24.mat';'anno25.mat';'anno26.mat';'anno27.mat';'anno28.mat';'anno29.mat'; ...
     'anno30.mat';'anno31.mat';'anno32.mat';'anno33.mat'];
-anno_dir = ['/home/yongyi/data/eccv_data/annotations/'];
+anno_dir = '/home/yongyi/data/eccv_data/annotations/';
+data_dir = '/home/yongyi/data/eccv_data/version_0416/data/';
+if (exist(data_dir,'file')==0)
+     mkdir data_dir
+end
 % vec_action = [0 0 0 1;0 0 1 0;0 1 0 0;1 0 0 0;];
 vec_action = [0 0 1;0 1 0;1 0 0;];
 % vec_pose = [0 0 0 0 0 0 0 0 1;0 0 0 0 0 0 0 1 0;0 0 0 0 0 0 1 0 0; ...
@@ -48,8 +52,8 @@ for i = 1:33
                 end
             end
         end
-        save(['data/',hog_anno_action_name(i,:)],'hog_anno_action');
-        save(['data/',hog_anno_pose_name(i,:)],'hog_anno_pose');
+        save([data_dir,hog_anno_action_name(i,:)],'hog_anno_action');
+        save([data_dir,hog_anno_pose_name(i,:)],'hog_anno_pose');
         %continue;
     else
         current_label = person_hog_label(:,seq);
@@ -63,7 +67,7 @@ for i = 1:33
                 hog_anno_pose{person_hog_label(4,j),frame_subtitle} = prob_pose(j,:);
             end
         end
-        save(['data/',hog_anno_action_name(i,:)],'hog_anno_action');
-        save(['data/',hog_anno_pose_name(i,:)],'hog_anno_pose');
+        save([data_dir,hog_anno_action_name(i,:)],'hog_anno_action');
+        save([data_dir,hog_anno_pose_name(i,:)],'hog_anno_pose');
     end
 end
