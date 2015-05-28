@@ -2,9 +2,12 @@ function average_ac(ac_label,ac_feature,set,type)
 if type == 0
     str_type = 'train';
 elseif type == 1 
-    str_type == 'test';
+    str_type = 'test';
 end
-data_dir = '/home/yongyi/master_program_data/max_ac_data';
+data_dir = '/home/yongyi/master_program_data/max_ac_data/';
+if exist(data_dir)==0
+    mkdir(data_dir);
+end
 feature = [];
 label = [];
 for i = 1:33
