@@ -4,9 +4,9 @@ if nargin <= 1
 end
 
 if test == 0
-    ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data';
+    ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data/';
 elseif test == 1
-    ac_data_dir = '/home/yongyi/master_program_data/improved_ac_data';
+    ac_data_dir = '/home/yongyi/master_program_data/improved_ac_data/';
 end
 
 anno_name = ['anno01.mat';'anno02.mat';'anno03.mat';'anno04.mat';'anno05.mat';'anno06.mat';'anno07.mat';'anno08.mat';'anno09.mat'; ...

@@ -15,7 +15,7 @@ anno_name = ['anno01.mat';'anno02.mat';'anno03.mat';'anno04.mat';'anno05.mat';'a
 anno_dir = '/home/yongyi/data/eccv_data/annotations/';
 data_dir = '/home/yongyi/data/eccv_data/version_0416/data/';
 if (exist(data_dir,'file')==0)
-     mkdir data_dir
+     mkdir(data_dir);
 end
 % vec_action = [0 0 0 1;0 0 1 0;0 1 0 0;1 0 0 0;];
 vec_action = [0 0 1;0 1 0;1 0 0;];

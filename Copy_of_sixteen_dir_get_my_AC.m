@@ -28,9 +28,9 @@ ac_name = ['ac01.mat';'ac02.mat';'ac03.mat';'ac04.mat';'ac05.mat';'ac06.mat';'ac
     'ac30.mat';'ac31.mat';'ac32.mat';'ac33.mat'];
 anno_dir = '/home/yongyi/data/eccv_data/annotations/';
 hog_dir = '/home/yongyi/data/eccv_data/version_0416/data/';
-ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data';
+ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data/';
 if (exist(ac_data_dir ,'file')==0)
-     mkdir ac_data_dir 
+     mkdir(ac_data_dir); 
 end
 if (exist(hog_dir,'file')==0)
     error('hog files do not exist!');
