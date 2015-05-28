@@ -7,18 +7,12 @@ addpath('/home/yongyi/data/eccv_data/version_0416/multilayer_supervised');
 addpath('/home/yongyi/data/eccv_data/version_0416/NN');
 run('/home/yongyi/vlfeat-0.9.20-bin/vlfeat-0.9.20/toolbox/vl_setup');
 % ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data';
-if test == 0
-    ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data';
-elseif test == 1
-    ac_data_dir = '/home/yongyi/master_program_data/improved_ac_data';
-end
+
 predict_data_dir = '/home/yongyi/master_program_data/predict_data';
 if (exist(predict_data_dir,'file')==0)
     mkdir predict_data_dir
 end
-if (exist(ac_data_dir,'file')==0)
-    error('ac files do not exist!');
-end
+
 % addpath('E:\master program\UFLDL\stanford_dl_ex-master\multilayer_supervised_copy');
 % addpath('E:\master program\UFLDL\stanford_dl_ex-master\common\minFunc_2012');
 % load('new_prob_set3_pose.mat');
@@ -27,8 +21,19 @@ end
 % prob_action = prob_estimates;
 % load('person_hog_label_test_set3.mat');
 % collect_prob(prob_pose,prob_action,person_hog_label);
-% Copy_of_sixteen_dir_get_my_AC(set);
-%  collect_ac_data(set,test);
+Copy_of_sixteen_dir_get_my_AC(set);
+collect_ac_data(set,test);
+
+if test == 0
+    ac_data_dir = '/home/yongyi/master_program_data/origin_ac_data';
+elseif test == 1
+    ac_data_dir = '/home/yongyi/master_program_data/improved_ac_data';
+end
+
+if (exist(ac_data_dir,'file')==0)
+    error('ac files do not exist!');
+end
+
 if set == 1
     load([ac_data_dir,'train_label_set1.mat']);
     load([ac_data_dir,'train_ac_feature_set1.mat']);
